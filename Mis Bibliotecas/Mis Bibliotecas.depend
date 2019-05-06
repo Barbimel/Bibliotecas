@@ -1,0 +1,58 @@
+# depslib dependency file v1.0
+1557125413 source:f:\estudios\1 cuatrimestre\program y lab 1 (c)\mis bibliotecas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	"input.h"
+	"input.h"
+	"arrays.h"
+	"employees.h"
+	"lunches.h"
+
+1557119099 source:f:\estudios\1 cuatrimestre\program y lab 1 (c)\mis bibliotecas\input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	"input.h"
+
+1557097702 f:\estudios\1 cuatrimestre\program y lab 1 (c)\mis bibliotecas\input.h
+
+1557115174 source:f:\estudios\1 cuatrimestre\program y lab 1 (c)\mis bibliotecas\arrays.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	"input.h"
+	"arrays.h"
+
+1557095151 f:\estudios\1 cuatrimestre\program y lab 1 (c)\mis bibliotecas\arrays.h
+
+1557125309 f:\estudios\1 cuatrimestre\program y lab 1 (c)\mis bibliotecas\employees.h
+
+1557125286 source:f:\estudios\1 cuatrimestre\program y lab 1 (c)\mis bibliotecas\employees.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	"input.h"
+	"employees.h"
+
+1557125286 source:f:\estudios\1 cuatrimestre\program y lab 1 (c)\mis bibliotecas\lunches.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	"input.h"
+	"arrays.h"
+	"employees.h"
+	"lunches.h"
+
+1557123666 f:\estudios\1 cuatrimestre\program y lab 1 (c)\mis bibliotecas\lunches.h
+
