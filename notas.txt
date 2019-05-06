@@ -1,0 +1,39 @@
+NOTAS DE FUNCIONES:
+
+-Todos los get, (menos getString), llevan '&' en el parametro actual.
+-NO usamos los TRIES en este parcial.
+-getDate se puede usar SOLO en main. En funciones se usan 3 getInt, uno para el dia, otro para el mes, otro para el año. (para printf %d/%d/%d).
+-Bibliotecas input y arrays NO se modifican (solo opciones de menu en imput).
+-Las funciones de la biblioteca "lunches" son de dudoso funcionamiento, si el parcial no pide especificamente trabajar con comidas, es preferible que modifiques las funciones de la libreria "employees" que son casi iguales pero estan totalmente testeadas.
+
+(Me las dio Lucchetti, dice que funcionan pero no me dio tiempo a testearlas correctamente).
+_____________________________
+
+DECLARAR ARRAY DE ESTRUCTURA eEmployee (en main)
+
+eEmployee lista[TAM] = 
+{
+        {111,"Juan",'m',30000,{01,02,1999},1,1},
+        {222,"Ana",'f',20000,{10,6,1980},3,1},
+        {33,"Tom",'m',15000,{10,12,1999},4,1},
+        {66,"Julio",'m',10000,{20,04,1972},3,1},
+        {55,"Paula",'m',15000,{8,03,1990},5,1},
+
+};
+
+//fileNumber, fullName, sex, salary, {dia,mes,año}, etc. etc. (En el orden que estan dispuestos en la estructura madre).
+____________________________
+
+ACCEDER A CAMPO DE VARIABLE eEmployee Employed:
+
+employed.fullname;
+employed.sex:
+employed.birth.day;
+______________________________
+
+ACCEDER A CAMPOR DE UN ARRAY eEmployee Employees[];
+
+employees[i].fullname;
+employees[i].sex;
+employees[i].birth.day;
+________________________________
