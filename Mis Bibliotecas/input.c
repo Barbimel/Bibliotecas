@@ -17,20 +17,18 @@ int menu (void)
 {
     int choice;
 
-    printf("MENU DE OPCIONES: \n");
+    printf("MENU DE OPCIONES: \n\n");
 
     printf("1. ALTA DE EMPLEADO. \n");
-    printf("2. BAJA DE EMPLEADO. \n");
-    printf("3. MODIFICAR REGISTRO DE EMPLEADO. \n");
-    printf("4. ORDENAR LISTA DE EMPLEADOS. \n");
-    printf("5. LISTAR EMPLEADOS. \n");
-    printf("6. LISTAR EMPLEADOS POR SECTOR. \n");
-    printf("7. ORDENAR SECTORES POR CANTIDAD DE EMPLEADOS. \n");
-    printf("8. SALIR \n");
+    printf("2. MODIFICAR REGISTRO DE EMPLEADO. \n");
+    printf("3. BAJA DE EMPLEADO. \n");
+    printf("4. INFORMES. \n");
+    printf("5. SALIR \n\n");
 
     printf("Ingrese el numero de la funcion a realizar: ");
     setbuf(stdin, NULL);
     scanf("%d",&choice);
+    printf("\n");
 
     return choice;
 }
@@ -256,3 +254,4 @@ int getDate (eDate toDate, char* typeDate, int minYear, int maxYear)
     return ok;
 }
 //_______________________________________________________________________________________________________________________________________________________________________________________
+

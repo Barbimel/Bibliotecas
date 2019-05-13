@@ -1,16 +1,10 @@
 //IFNDEF_________________________________________________________________________________________________________________________________________________________________________________
 #ifndef input_H_INCLUDED
 #define input_H_INCLUDED
+#include "input.h"
 #endif //input_H_INCLUDED
 
 //STRUCTS________________________________________________________________________________________________________________________________________________________________________________
-
-typedef struct
-{
-    int day;
-    int month;
-    int year;
-}eDate;
 
 //PROTOTIPES_____________________________________________________________________________________________________________________________________________________________________________
 
@@ -125,8 +119,8 @@ void getCharTries(char* inputChar, char* message[], char* error[], char min, cha
 /** \brief pide el ingreso de una fecha al usuario.
  * \param toDate: es la variable tipo estructura donde alcenaremos la fecha ingresada.
  * \param typeDate: El tipo de fecha que queremos ingresar (Ej. nacimiento, casamiento, despido, etc.).
- * \param minYear: es el año minimo permitido en la fecha a ingresar.
- * \param maxYear: es el año maximo permitido en la fecha a ingresar.
+ * \param minYear: es el aÃ±o minimo permitido en la fecha a ingresar.
+ * \param maxYear: es el aÃ±o maximo permitido en la fecha a ingresar.
  * \return 0 si el usuario esta conforme con la fecha ingresada, -1 si quiere cancelar el proceso. */
 
 int getDate (eDate toDate, char* typeDate, int minYear, int maxYear);

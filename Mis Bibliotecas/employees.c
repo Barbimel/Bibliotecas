@@ -12,6 +12,11 @@
 #include "employees.h"
 #endif //employees_H_INCLUDED
 
+#ifndef input_H_INCLUDED
+#define input_H_INCLUDED
+#include "input.h"
+#endif //_H_INCLUDED
+
 //FUNCIONES_______________________________________________________________________________________________________________________________________________________________________________
 
 void InitializeStates (eEmployee array[], int size)
@@ -23,24 +28,28 @@ void InitializeStates (eEmployee array[], int size)
 }
 //________________________________________________________________________________________________________________________________________________________________________________________
 
-void showEmployee (eEmployee employed, eSector sector[], int sectorSize)
+void showEmployee(eEmployee array[], int size, int id)
 {
-    char sectorName[20];
-    getSector(sectorName, sector, sectorSize, employed.sectorId);
-    printf ("   %d       %s       %c       %.2f   %.02d/%d/%d   %s\n", employed.fileNumber, employed.fullName, employed.sex, employed.salary, employed.birth.day, employed.birth.month, employed.birth.year, sectorName);
+    for(int i = 0; i < size-1; i++)
+    {
+        if(array[i].fileNumber == id)
+        {
+            printf ("  %d          %s      %s    %.2f     %d \n", array[i].fileNumber, array[i].lastName, array[i].name, array[i].salary, array[i].sectorId);
+        }
+    }
 }
 //________________________________________________________________________________________________________________________________________________________________________________________
 
-void showEmployees (eEmployee array[],int size,eSector sector[],int sectorSize)
+void showEmployees (eEmployee array[], int size, eSector sector[], int sectorSize)
 {
     int counter = 0;
-    printf ("\n Legajo     Nombre      Sexo     Sueldo     Nacimiento     Sector\n");
+    printf ("\n Legajo     Apellido     Nombre     Sueldo     Sector\n");
 
     for (int i = 0; i < size; i++)
     {
         if (array[i].state == 1)
         {
-            showEmployee(array[i], sector, sectorSize);
+            showEmployee(array, size, array[i].fileNumber);
             counter++;
         }
     }
@@ -80,7 +89,7 @@ int freeState(eEmployee array[],int size)
 }
 //________________________________________________________________________________________________________________________________________________________________________________________
 
-int searchEmployee(eEmployee array[],int size,int fileNumber)
+int searchEmployee(eEmployee array[], int size, int fileNumber)
 {
     int indexFile = -1;
 
@@ -101,7 +110,6 @@ void registerEmployee (eEmployee array[], int size, eSector sector[], int sector
     int index;
     int fileNumber;
     char sectorAux[3];
-    eDate birth;
 
     index = freeState(array, size);
 
@@ -113,28 +121,26 @@ void registerEmployee (eEmployee array[], int size, eSector sector[], int sector
     {
         printf("Ingrese el numero de legajo: ");
         scanf("%d",&fileNumber);
-        printf("\n\n");
+        printf("\n");
 
         registered = searchEmployee(array, size, fileNumber);
 
         if(registered != -1)
         {
             printf("\n El numero de legago ingresado ya se encuentra registrado: \n");
-            printf(" LEGAJO      NOMBRE    SEXO      SUELDO       NACIMIENTO\n");
-            showEmployee(array[registered], sector, sectorSize);
+            printf(" LEGAJO    APELLIDO     NOMBRE     SUELDO    SECTOR\n");
+            showEmployee(array, size, fileNumber);
             printf("\n");
         }
         else
         {
             array[index].fileNumber = fileNumber;
-            getString(array[index].fullName, "Ingrese el nombre completo de su empleado: ", "ERROR! El nombre es muy largo.", 2, 50);
-            getSpecificChar(&array[index].sex, "Ingrese el sexo de su empleado (F/M): ", "ERROR! Ingreso un caracter no valido.", 'f', 'm');
-            getFloat(&array[index].salary, "Ingrese el sueldo bruto de su empleado: ", "ERROR! Ingreso un importe no valido.", 0, 1000000);
-            getInt(&array[index].birth.day, "Ingrese el dia de nacimiento de su empleado: ", "ERROR! El dia no es valido.", 1, 31);
-            getInt(&array[index].birth.month, "Ingrese el mes de nacimiento de su empleado: ", "ERROR! El mes no es valido.", 1, 12);
-            getInt(&array[index].birth.year, "Ingrese el anio de nacimiento de su empleado: ", "ERROR! El anio no es valido.", 1940, 2019);
-            getInt(&array[index].sectorId, "Ingrese el SectorID de su empleado: ", "ERROR! El ID no es valido.", 1, 5);
             array[index].state = 1;
+            getString(array[index].lastName, "Ingrese el apellido de su empleado: ", "ERROR! El apellido es muy largo.", 2, 50);
+            getString(array[index].name, "Ingrese el nombre de su empleado: ", "ERROR! El nombre es muy largo.", 2, 50);
+            getFloat(&array[index].salary, "Ingrese el sueldo bruto de su empleado: ", "ERROR! Ingreso un importe no valido.", 0, 1000000);
+            getInt(&array[index].sectorId, "Ingrese el SectorID de su empleado: ", "ERROR! El ID no es valido.", 1, sectorSize);
+
             printf("\n EL REGISTRO SE REALIZO CON EXITO.\n\n");
         }
     }
@@ -161,11 +167,11 @@ void unsubscribeEmployee(eEmployee array[],int size)
         do
         {
             printf("\n Ingreso el legajo numero: %d \n",array[indexFile]);
-            printf("confirma la baja definitiva de su empleado? (S/N): ");
             setbuf(stdin, NULL);
-            confirm = getche();
+            getSpecificChar(&confirm, "Confirma la baja definitiva de su empleado? (S/N)", "ERROR! El caracter ingresado no es valido", 's', 'n');
             printf("\n");
             system("pause");
+
             if(toupper(confirm) == 'N')
             {
                 printf ("Se ha cancelado el proceso de baja en curso.\n\n");
@@ -182,9 +188,9 @@ void unsubscribeEmployee(eEmployee array[],int size)
 }
 //________________________________________________________________________________________________________________________________________________________________________________________
 
-void modifyRecord (eEmployee array[], int size)
+void modifyRecord (eEmployee array[], int size, eSector vector[], int vectorSize)
 {
-    int indexFile;
+    int index;
     int fileNumber;
     char confirm;
     int salary;
@@ -192,9 +198,9 @@ void modifyRecord (eEmployee array[], int size)
     printf ("\n Ingrese el numero de legajo correspondiente a su empleado: ");
     scanf ("%d", &fileNumber);
 
-    indexFile = searchEmployee(array, size, fileNumber);
+    index = searchEmployee(array, size, fileNumber);
 
-    if (indexFile == -1)
+    if (index == -1)
     {
         printf("\n El numero de legajo ingresado no existe en el sistema. \n\n");
     }
@@ -203,9 +209,8 @@ void modifyRecord (eEmployee array[], int size)
         do
         {
             printf ("Usted ingreso el legajo numero: %d \n", fileNumber);
-            printf ("Confirma que desea modificar el registro de su empleado? (S/N): \n");
             setbuf(stdin, NULL);
-            confirm = getche();
+            getSpecificChar(&confirm, "Confirma la modificacion de este registro? (S/N)", "ERROR! El caracter ingresado no es valido", 's', 'n');
             printf ("\n");
             system("pause");
 
@@ -216,7 +221,10 @@ void modifyRecord (eEmployee array[], int size)
             }
             else
             {
-                getFloat(&array[indexFile].salary, "Ingrese el nuevo sueldo bruto de su empleado: ", "ERROR! Ingreso un importe no valido.", 0, 1000000);
+                getString(array[index].lastName, "Ingrese el apellido de su empleado: ", "ERROR! El apellido es muy largo.", 2, 50);
+                getString(array[index].name, "Ingrese el nombre de su empleado: ", "ERROR! El nombre es muy largo.", 2, 50);
+                getFloat(&array[index].salary, "Ingrese el sueldo bruto de su empleado: ", "ERROR! Ingreso un importe no valido.", 0, 1000000);
+                getInt(&array[index].sectorId, "Ingrese el SectorID de su empleado: ", "ERROR! El ID no es valido.", 1, vectorSize);
                 printf ("SE MODIFICO EL REGISTRO CON EXITO.\n\n");
             }
 
@@ -233,14 +241,14 @@ void sortEmployees (eEmployee array[], int size)
     {
         for (int j = i+1; j < size; j++)
         {
-            if (stricmp(array[i].fullName, array[j].fullName) > 0)
+            if (stricmp(array[i].lastName, array[j].lastName) > 0)
             {
                 auxiliary = array[i];
                 array[i] = array[j];
                 array[j] = auxiliary;
             }
 
-            if (array[i].salary > array[j].salary)
+            if (array[i].sectorId > array[j].sectorId)
             {
                 auxiliary = array[i];
                 array[i] = array[j];
@@ -273,9 +281,9 @@ void showSectors (eEmployee array[], int size, eSector sector[], int sectorSize)
         printf ("Sector: %s\n\n", sector[i].description);
         for (int j = 0; j < size; j++)
         {
-            if( (array[j].sectorId == sector[i].id) && array[j].state == 1) //CUAL ES EL ERROR?
+            if( (array[j].sectorId == sector[i].id) && array[j].state == 1)
             {
-                showEmployee(array[j], sector, sectorSize);
+                showEmployee(array, size, array[i].fileNumber);
             }
         }
     }
@@ -304,51 +312,40 @@ void employeesBySector(eEmployee array[], int size, eSector sector[], int sector
 }
 //________________________________________________________________________________________________________________________________________________________________________________________
 
-/*int employeesDates (eEmployee array[], char* typeDate, int minYear, int maxYear) //NO FUNCIONA.
+void salariesReport(eEmployee array[], int size)
 {
-    int ok;
-    char confirm;
+    int counter = 0;
+    float total = 0;
+    float average = 0;
+    int aboveAverage = 0;
 
-    printf("-");
-    printf(typeDate);
-    printf("-\n");
-    getInt(&array.birth.year, "Ingrese el numero de anio: ", "ERROR! El anio ingresado no es valido. \n\n", minYear, maxYear);
-    getInt(&array.birth.month, "Ingrese el numero de mes: ", "ERROR! Hay 12 meses en el calendario.\n\n", 1, 12);
-
-    switch(array.birth.month)
+    for (int i = 0; i < size; i++)
     {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-                getInt(&array.birth.day, "Ingrese el numero de dia: ", "ERRRO! El mes tiene 31 dias.\n\n", 1, 31);
-                break;
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-                getInt(&array.birth.day, "Ingrese el numero de dia: ", "ERROR! El mes tiene 30 dias. \n\n", 1, 30);
-                break;
-        default:
-                getInt(&array.birth.day "Ingrese el numero de dia: ", "ERROR! El mes tiene 28 dias. \n\n", 1, 28);
-                break;
+        if(array[i].state == 1)
+        {
+            counter++;
+            total = total + array[i].salary;
+            average = total / counter;
+
+            if(array[i].salary > average)
+            {
+                aboveAverage++;
+            }
+        }
     }
 
-    printf("\nLa fecha ingresada es: %02d/%02d/%02d \n", toDate.day, toDate.month, toDate.year);
-    getSpecificChar(&confirm, "\nEs correcta? (S/N): ", "ERROR! Debe ingresar S o N.\n", 's', 'n');
-
-    if(confirm == 'S')
+    if(counter == 0)
     {
-        ok = 0;
+        printf("ERROR! No hay empleados activos para calcular informes. \n\n");
     }
     else
     {
-        printf("El ingreso de fecha fue cancelado.");
-        ok: -1;
+        printf("\nINFORME DE SUELDOS:\n");
+        printf("El total invertido en salarios es de: $ %.2f \n", total);
+        printf("El salario promedio es de: $ %.2f \n", average);
+        printf("Un total de %d empleados superan el salario promedio \n\n", aboveAverage);
     }
+}
+//________________________________________________________________________________________________________________________________________________________________________________________
 
-    return ok;
-}*/
+

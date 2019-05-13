@@ -31,10 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="arrays.c">
+		<Unit filename="authors.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="arrays.h" />
+		<Unit filename="authors.h" />
+		<Unit filename="books.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="books.h" />
+		<Unit filename="borrowBooks.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="borrowBooks.h" />
 		<Unit filename="employees.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -43,13 +51,13 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="input.h" />
-		<Unit filename="lunches.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="lunches.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="partners.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="partners.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
