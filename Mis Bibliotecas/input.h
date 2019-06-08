@@ -1,10 +1,16 @@
 //IFNDEF_________________________________________________________________________________________________________________________________________________________________________________
 #ifndef input_H_INCLUDED
 #define input_H_INCLUDED
-#include "input.h"
 #endif //input_H_INCLUDED
 
 //STRUCTS________________________________________________________________________________________________________________________________________________________________________________
+
+typedef struct
+{
+    int day;
+    int month;
+    int year;
+}eDate;
 
 //PROTOTIPES_____________________________________________________________________________________________________________________________________________________________________________
 
@@ -23,7 +29,7 @@ int menu(void);
  * \param max: es el numero maximo que se puede ingresar.
  * \return void */
 
-void getInt(int* inputInt, char message[], char error[], int min, int max);
+void getInt (int* inputInt, char* message, char* error, int min, int max);
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
 /** \brief pide un numero entero al usuario, lo valida por rango con intentos limitados.
@@ -35,7 +41,15 @@ void getInt(int* inputInt, char message[], char error[], int min, int max);
  * \param tries: es la cantidad de intentos disponibles.
  * \return void */
 
-void getIntTries(int* inputInt, char* message[], char* error[], int min, int max, int tries);
+void getIntTries (int* inputInt, char* message, char* error, int min, int max, int tries);
+//_______________________________________________________________________________________________________________________________________________________________________________________
+
+/** \brief genera aleatoriamente un numero entero positivo contenido en un rango numerico determinado.
+ * \param min: es el numero minimo permitido en el rango.
+ * \param max: es el numero maximo permitido en el rango.
+ * \return randomIn: es el numero aleatorio generado.*/
+
+int getRandomInt (int initialize, int min, int max);
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
 /** \brief pide un numero decimal al usuario, lo valida por rango y lo devuelve.
@@ -46,7 +60,7 @@ void getIntTries(int* inputInt, char* message[], char* error[], int min, int max
  * \param max: es el numero maximo que se puede ingresar.
  * \return void */
 
-void getFloat(float* inputFloat, char message[], char error[], float min, float max);
+void getFloat (float* inputFloat, char* message, char* error, float min, float max);
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
 /** \brief pide un numero decimal al usuario, lo valida por rango con intentos limitados.
@@ -58,7 +72,7 @@ void getFloat(float* inputFloat, char message[], char error[], float min, float 
  * \param tries: es la cantidad de intentos disponibles.
  * \return void */
 
-void getFloatTries(float* inputFloat, char* message[], char* error[], int min, int max, int tries);
+void getFloatTries (float* inputFloat, char* message, char* error, int min, int max, int tries);
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
 /** \brief pide un caracter al usuario, lo valida por rango y lo devuelve.
@@ -69,7 +83,7 @@ void getFloatTries(float* inputFloat, char* message[], char* error[], int min, i
  * \param max: es el caracter maximo que se puede ingresar.
  * \return void */
 
-void getChar(char* inputChar, char message[], char error[], char min, char max);
+void getChar (char* inputChar, char* message, char* error, char min, char max);
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
 /** \brief busca una respuesta del usuario pidiendole que indique un caracter u otro.
@@ -80,7 +94,7 @@ void getChar(char* inputChar, char message[], char error[], char min, char max);
  * \param max: es el segundo caracter valido que se puede ingresar.
  * \return void */
 
- void getSpecificChar(char* inputChar, char message[], char error[], char min, char max);
+void getSpecificChar (char* inputChar, char* message, char* error, char min, char max);
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
 /** \brief pide un caracter al usuario, lo valida por rango con intentos limitados.
@@ -91,7 +105,7 @@ void getChar(char* inputChar, char message[], char error[], char min, char max);
  * \param max: es el caracter maximo que se puede ingresar.
  * \return void */
 
-void getCharTries(char* inputChar, char* message[], char* error[], char min, char max, int tries);
+void getCharTries (char* inputChar, char* message, char* error, char min, char max, int tries);
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
 /** \brief pide un texto al usuario, lo valida por rango y lo devuelve.
@@ -102,7 +116,7 @@ void getCharTries(char* inputChar, char* message[], char* error[], char min, cha
  * \param max: es la cantidad de caracteres maxima permitida.
  * \return void */
 
- void getString (char* inputString, char* message[], char* error[], int min, int max);
+ void getString (char* inputString, char* message, char* error, int min, int max);
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
 /** \brief pide un texto al usuario, lo valida por rango con intentos limitados.
@@ -113,14 +127,14 @@ void getCharTries(char* inputChar, char* message[], char* error[], char min, cha
  * \param max: es la cantidad de caracteres maxima permitida.
  * \return void */
 
- void getStringTries (char* inputString, char* message[], char* error[], int min, int max, int tries);
+ void getStringTries (char* inputString, char* message, char* error, int min, int max, int tries);
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
 /** \brief pide el ingreso de una fecha al usuario.
  * \param toDate: es la variable tipo estructura donde alcenaremos la fecha ingresada.
  * \param typeDate: El tipo de fecha que queremos ingresar (Ej. nacimiento, casamiento, despido, etc.).
- * \param minYear: es el aÃ±o minimo permitido en la fecha a ingresar.
- * \param maxYear: es el aÃ±o maximo permitido en la fecha a ingresar.
+ * \param minYear: es el año minimo permitido en la fecha a ingresar.
+ * \param maxYear: es el año maximo permitido en la fecha a ingresar.
  * \return 0 si el usuario esta conforme con la fecha ingresada, -1 si quiere cancelar el proceso. */
 
 int getDate (eDate toDate, char* typeDate, int minYear, int maxYear);

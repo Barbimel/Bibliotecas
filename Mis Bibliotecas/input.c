@@ -17,24 +17,26 @@ int menu (void)
 {
     int choice;
 
-    printf("MENU DE OPCIONES: \n\n");
+    printf("MENU DE OPCIONES: \n");
 
     printf("1. ALTA DE EMPLEADO. \n");
-    printf("2. MODIFICAR REGISTRO DE EMPLEADO. \n");
-    printf("3. BAJA DE EMPLEADO. \n");
-    printf("4. INFORMES. \n");
-    printf("5. SALIR \n\n");
+    printf("2. BAJA DE EMPLEADO. \n");
+    printf("3. MODIFICAR REGISTRO DE EMPLEADO. \n");
+    printf("4. ORDENAR LISTA DE EMPLEADOS. \n");
+    printf("5. LISTAR EMPLEADOS. \n");
+    printf("6. LISTAR EMPLEADOS POR SECTOR. \n");
+    printf("7. ORDENAR SECTORES POR CANTIDAD DE EMPLEADOS. \n");
+    printf("8. SALIR \n");
 
     printf("Ingrese el numero de la funcion a realizar: ");
     setbuf(stdin, NULL);
     scanf("%d",&choice);
-    printf("\n");
 
     return choice;
 }
 //________________________________________________________________________________________________________________________________________________________________________________________
 
-void getInt (int* inputInt, char message[], char error[], int min, int max)
+void getInt (int* inputInt, char* message, char* error, int min, int max)
 {
     printf(message);
     scanf("%d", inputInt);
@@ -48,7 +50,7 @@ void getInt (int* inputInt, char message[], char error[], int min, int max)
 }
 //________________________________________________________________________________________________________________________________________________________________________________________
 
-void getIntTries (int* inputInt, char* message[], char* error[], int min, int max, int tries)
+void getIntTries (int* inputInt, char* message, char* error, int min, int max, int tries)
 {
     do
     {
@@ -68,7 +70,18 @@ void getIntTries (int* inputInt, char* message[], char* error[], int min, int ma
 }
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
-void getFloat (float* inputFloat, char message[], char error[], float min, float max)
+int getRandomInt (int initialize, int min, int max)
+{
+    if(initialize)
+    {
+        srand(time(NULL));
+    }
+
+    return min + (rand() % (max + 1 - min));
+}
+//_______________________________________________________________________________________________________________________________________________________________________________________
+
+void getFloat (float* inputFloat, char* message, char* error, float min, float max)
 {
     printf(message);
     scanf("%f", inputFloat);
@@ -83,7 +96,7 @@ void getFloat (float* inputFloat, char message[], char error[], float min, float
 }
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
-void getFloatTries (float* inputFloat, char* message[], char* error[], int min, int max, int tries)
+void getFloatTries (float* inputFloat, char* message, char* error, int min, int max, int tries)
 {
     do
     {
@@ -103,10 +116,10 @@ void getFloatTries (float* inputFloat, char* message[], char* error[], int min, 
 }
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
-void getChar (char* inputChar, char message[], char error[], char min, char max)
+void getChar (char* inputChar, char* message, char* error, char min, char max)
 {
     printf(message);
-    setbuf(stdin,NULL);
+    setbuf(stdin, NULL);
     scanf("%c", inputChar);
 
     while (*inputChar < min || *inputChar > max)
@@ -120,7 +133,7 @@ void getChar (char* inputChar, char message[], char error[], char min, char max)
 }
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
-void getSpecificChar (char* inputChar, char message[], char error[], char min, char max)
+void getSpecificChar (char* inputChar, char* message, char* error, char min, char max)
 {
     printf(message);
     setbuf(stdin, NULL);
@@ -140,7 +153,7 @@ void getSpecificChar (char* inputChar, char message[], char error[], char min, c
 }
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
-void getCharTries (char* inputChar, char* message[], char* error[], char min, char max, int tries)
+void getCharTries (char* inputChar, char* message, char* error, char min, char max, int tries)
 {
     do
     {
@@ -163,12 +176,12 @@ void getCharTries (char* inputChar, char* message[], char* error[], char min, ch
 }
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
-void getString (char* inputString, char* message[], char* error[], int min, int max)
+void getString (char* inputString, char* message, char* error, int min, int max)
 {
     printf(message);
     setbuf(stdin, NULL);
     gets(inputString);
-    *inputString = tolower(*inputString);
+    *inputString = toupper(*inputString);
 
     while (strlen(inputString) < min || strlen(inputString) > max)
     {
@@ -177,12 +190,12 @@ void getString (char* inputString, char* message[], char* error[], int min, int 
         printf(message);
         setbuf(stdin, NULL);
         gets(inputString);
-        *inputString = tolower(*inputString);
+        *inputString = toupper(*inputString);
     }
 }
 //_______________________________________________________________________________________________________________________________________________________________________________________
 
-void getStringTries (char* inputString, char* message[], char* error[], int min, int max, int tries)
+void getStringTries (char* inputString, char* message, char* error, int min, int max, int tries)
 {
     do
     {
@@ -254,4 +267,3 @@ int getDate (eDate toDate, char* typeDate, int minYear, int maxYear)
     return ok;
 }
 //_______________________________________________________________________________________________________________________________________________________________________________________
-
